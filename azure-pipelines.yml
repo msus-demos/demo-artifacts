@@ -1,0 +1,12 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- script: |
+    dotnet publish -c release -o $(build.artifactStagingDirectory) src/Artifacts.csproj
+  displayName: Publish application
+
+- task: PublishBuildArtifacts@1

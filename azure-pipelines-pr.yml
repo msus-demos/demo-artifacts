@@ -1,0 +1,10 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- script: |
+    dotnet test ./tests/Artifacts.Tests/Artifacts.Tests.csproj
+  displayName: Run Tests
