@@ -1,10 +1,16 @@
-trigger:
-  - master
+pr:
+- master
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
 - script: |
-    dotnet test ./tests/Artifacts.Tests/Artifacts.Tests.csproj
-  displayName: Run Tests
+    dotnet test ./tests/Artifacts.Tests/Artifacts.Tests.csproj --logger trx --collect "Code coverage" 
+  displayName: Run Unit Tests
+
+- task: PublishTestResults@2
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
+    failTaskOnFailedTests: true
