@@ -5,16 +5,12 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-  - task: DotNetCoreCLI@2
-    displayName: Run unit tests
-    inputs:
-      command: test
-      projects: ./tests/Artifacts.Tests/Artifacts.Tests.csproj
-      arguments: --filter "TestCategory!=FailsInCloudTest" -v n
-    continueOnError: true # we have a lot of unit tests that are SUPPOSED to fail
+- script: |
+    dotnet test ./tests/Artifacts.Tests/Artifacts.Tests.csproj --logger trx --collect "Code coverage" 
+  displayName: Run Unit Tests
 
-  - task: PublishTestResults@2
-    inputs:
-      testRunner: VSTest
-      testResultsFiles: '**/*.trx'
-      failTaskOnFailedTests: true
+- task: PublishTestResults@2
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
+    failTaskOnFailedTests: true
