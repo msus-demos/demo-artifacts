@@ -14,10 +14,6 @@ steps:
   displayName: Determine Semantic Version
 
 - powershell: |
-    'Write-Host "##vso[build.updatebuildnumber]$(GitVersion.AssemblySemVer)"'
-  displayName: 'Update build number'
-
-- powershell: |
     dotnet publish src/Artifacts/Artifacts.csproj `
       --output $(build.artifactStagingDirectory) `
       -p:Version=$(GitVersion.AssemblySemVer)
