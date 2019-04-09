@@ -2,11 +2,19 @@ trigger:
   - master
 
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: 'windows-2019'
 
 steps:
-- script: |
-    dotnet pack -c release --include-symbols -o $(build.artifactStagingDirectory) src/Artifacts/Artifacts.csproj
-  displayName: Create a NuGet Package
+
+- task: gittools.gitversion.gitversion-task.GitVersion@4
+  inputs:
+    preferBundledVersion: false
+  displayName: Determine Semantic Version
+
+- powershell: |
+    dotnet publish src/Artifacts/Artifacts.csproj `
+      --output $(build.artifactStagingDirectory) `
+      -p:Version=$(GitVersion.AssemblySemVer)
+  displayName: dotnet publish
 
 - task: PublishBuildArtifacts@1
