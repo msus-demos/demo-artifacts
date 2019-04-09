@@ -14,6 +14,7 @@ namespace MicrosoftFieldDemos.Artifacts.Tests
 
             Assert.False(String.IsNullOrEmpty(content.Name));
             Assert.False(String.IsNullOrEmpty(content.Company));
+            Assert.False(String.IsNullOrEmpty(content.Country));
         }
 
         [Fact]

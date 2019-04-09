@@ -13,9 +13,11 @@ namespace MicrosoftFieldDemos.Artifacts
         }
 
         public DemoContent GetDemoContent() {
+            
             var content = new DemoContent {
                 Name = Faker.Name.FullName(),
-                Company = _CompanyName ?? Faker.Company.Name()
+                Company = _CompanyName ?? Faker.Company.Name(),
+                Country = Faker.Address.Country()
             };
 
             return content;
