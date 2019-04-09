@@ -13,7 +13,7 @@ steps:
 
 - powershell: |
     dotnet pack src/Artifacts/Artifacts.csproj `
-      --include-symbols
+      --include-symbols `
       --output $(build.artifactStagingDirectory) `
       -p:Version=$(GitVersion.AssemblySemVer)
   displayName: dotnet publish
