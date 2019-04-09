@@ -1,20 +1,26 @@
+name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
+
 trigger:
   - master
 
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: 'windows-2019'
 
 steps:
-- task: gittools.gitversion-netcore-preview.gitversion-netcore-task.GitVersionNetCore@4
+
+- task: gittools.gitversion.gitversion-task.GitVersion@4
+  inputs:
+    preferBundledVersion: false
   displayName: Determine Semantic Version
 
-- script: |  
-    echo ##vso[build.updatebuildnumber]$AssemblySemVer
-  displayName: Set BuildNumber
+- powershell: |
+    'Write-Host "##vso[build.updatebuildnumber]$(GitVersion.AssemblySemVer)"'
+  displayName: 'Update build number'
 
-- script: |
-    dotnet publish src/Artifacts/Artifacts.csproj \
-      --output $(build.artifactStagingDirectory)
+- powershell: |
+    dotnet publish src/Artifacts/Artifacts.csproj `
+      --output $(build.artifactStagingDirectory) `
+      -p:Version=$(GitVersion.AssemblySemVer)
   displayName: dotnet publish
 
 - task: PublishBuildArtifacts@1
