@@ -5,6 +5,13 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
+- task: gittools.gitversion-netcore-preview.gitversion-netcore-task.GitVersionNetCore@5
+  displayName: Determine Semantic Version
+
+- script: |  
+  echo ##vso[build.updatebuildnumber]$AssemblySemVer
+  displayName: Set BuildNumber
+
 - script: |
     dotnet publish src/Artifacts/Artifacts.csproj \
       --output $(build.artifactStagingDirectory)
