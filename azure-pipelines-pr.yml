@@ -1,6 +1,8 @@
 trigger: none
 pr:
-- master
+  autoCancel: true
+  branches: 
+    include: master
 
 pool:
   vmImage: 'Ubuntu-16.04'
