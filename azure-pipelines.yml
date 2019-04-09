@@ -6,17 +6,7 @@ pool:
 
 steps:
 - script: |
-    nuget install GitVersion.CommandLine.DotNetCore -Version 4.1.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion -NonInteractive
-    dotnet $(Build.BinariesDirectory)/tools/GitVersion.CommandLine.DotNetCore/tools/GitVersion.dll /output buildserver /nofetch
-  displayName: Generate Semantic Version
-
-- script: |
-    dotnet build src/Artifacts/Artifacts.csproj -c Release /p:Version='$(GitVersion.NuGetVersion)'
-  displayName: Build Library
-
-- script: |
     dotnet pack src/Artifacts/Artifacts.csproj \
-      --no-build \
       --include-symbols \
       --output $(build.artifactStagingDirectory)
   displayName: Create NuGet Package
