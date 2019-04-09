@@ -6,9 +6,8 @@ pool:
 
 steps:
 - script: |
-    dotnet pack src/Artifacts/Artifacts.csproj \
-      --include-symbols \
+    dotnet publish src/Artifacts/Artifacts.csproj \
       --output $(build.artifactStagingDirectory)
-  displayName: Create NuGet Package
+  displayName: dotnet publish
 
 - task: PublishBuildArtifacts@1
