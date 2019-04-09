@@ -5,8 +5,25 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
+- task: NuGetCommand@2
+  inputs:
+    command: custom
+    arguments: 
+
 - script: |
-    dotnet pack -c release --include-symbols -o $(build.artifactStagingDirectory) src/Artifacts/Artifacts.csproj
-  displayName: Create a NuGet Package
+    nuget install GitVersion.CommandLine.DotNetCore -Version 4.0.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion
+    dotnet $(Build.BinariesDirectory)/tools/GitVersion.CommandLine.DotNetCore/tools/GitVersion.dll /output buildserver /nofetch
+    displayName: Generate Semantic Version
+
+- script: |
+    dotnet build src/Artifacts/Artifacts.csproj -c Release /p:Version='$(GitVersion.NuGetVersion)'
+  displayName: Build Library
+
+- script: |
+    dotnet pack src/Artifacts/Artifacts.csproj \
+      --no-build \
+      --include-symbols \
+      --output $(build.artifactStagingDirectory)
+  displayName: Create NuGet Package
 
 - task: PublishBuildArtifacts@1
