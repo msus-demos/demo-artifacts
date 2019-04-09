@@ -5,11 +5,6 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- task: NuGetCommand@2
-  inputs:
-    command: custom
-    arguments: 
-
 - script: |
     nuget install GitVersion.CommandLine.DotNetCore -Version 4.1.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion -NonInteractive
     dotnet $(Build.BinariesDirectory)/tools/GitVersion.CommandLine.DotNetCore/tools/GitVersion.dll /output buildserver /nofetch
