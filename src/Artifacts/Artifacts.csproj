@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>MicrosoftFieldDemos.Artifacts</RootNamespace>
+    <AssemblyName>MicrosoftFieldDemos.Artifacts</AssemblyName>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
