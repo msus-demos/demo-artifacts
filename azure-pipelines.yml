@@ -9,7 +9,7 @@ steps:
   displayName: Determine Semantic Version
 
 - script: |  
-  echo ##vso[build.updatebuildnumber]$AssemblySemVer
+    echo ##vso[build.updatebuildnumber]$AssemblySemVer
   displayName: Set BuildNumber
 
 - script: |
