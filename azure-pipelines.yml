@@ -11,9 +11,9 @@ steps:
     arguments: 
 
 - script: |
-    nuget install GitVersion.CommandLine.DotNetCore -Version 4.0.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion
+    nuget install GitVersion.CommandLine.DotNetCore -Version 4.1.0 -OutputDirectory $(Build.BinariesDirectory)/tools -ExcludeVersion -NonInteractive
     dotnet $(Build.BinariesDirectory)/tools/GitVersion.CommandLine.DotNetCore/tools/GitVersion.dll /output buildserver /nofetch
-    displayName: Generate Semantic Version
+  displayName: Generate Semantic Version
 
 - script: |
     dotnet build src/Artifacts/Artifacts.csproj -c Release /p:Version='$(GitVersion.NuGetVersion)'
