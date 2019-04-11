@@ -13,7 +13,7 @@ namespace MicrosoftFieldDemos.Artifacts.Tests
             var provider = new DemoContentProvider();
             var content = provider.GetDemoContent();
 
-            Assert.False(String.IsNullOrEmpty(content.Name));
+            Assert.True(String.IsNullOrEmpty(content.Name));
             Assert.False(String.IsNullOrEmpty(content.Company));
             Assert.False(String.IsNullOrEmpty(content.Country));
         }
