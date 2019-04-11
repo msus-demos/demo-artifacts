@@ -4,6 +4,7 @@ using Xunit;
 
 namespace MicrosoftFieldDemos.Artifacts.Tests
 {
+    // This is my test class
     public class DemoContentProviderTests
     {
         [Fact]
