@@ -4,6 +4,7 @@ using Xunit;
 
 namespace MicrosoftFieldDemos.Artifacts.Tests
 {
+    // This is my test class
     public class DemoContentProviderTests
     {
         [Fact]
@@ -14,6 +15,7 @@ namespace MicrosoftFieldDemos.Artifacts.Tests
 
             Assert.False(String.IsNullOrEmpty(content.Name));
             Assert.False(String.IsNullOrEmpty(content.Company));
+            Assert.False(String.IsNullOrEmpty(content.Country));
         }
 
         [Fact]

@@ -7,5 +7,7 @@ namespace MicrosoftFieldDemos.Artifacts
       public string Name { get; set; }
       
       public string Company { get; set; }
+
+      public string Country { get; set; }
    }
 }

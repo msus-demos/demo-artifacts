@@ -12,7 +12,8 @@ steps:
   displayName: Determine Semantic Version
 
 - powershell: |
-    dotnet publish src/Artifacts/Artifacts.csproj `
+    dotnet pack src/Artifacts/Artifacts.csproj `
+      --include-symbols `
       --output $(build.artifactStagingDirectory) `
       -p:Version=$(GitVersion.AssemblySemVer)
   displayName: dotnet publish
